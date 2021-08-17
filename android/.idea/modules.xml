@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-584051604/android.firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-584051604/android.firebase_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1813317340/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-1813317340/android.firebase_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/378944415/android.flutter_tts.iml" filepath="$PROJECT_DIR$/.idea/modules/378944415/android.flutter_tts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/108790995/android.google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/108790995/android.google_sign_in.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/902185133/android.share.iml" filepath="$PROJECT_DIR$/.idea/modules/902185133/android.share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1504019774/android.speech_to_text.iml" filepath="$PROJECT_DIR$/.idea/modules/-1504019774/android.speech_to_text.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1395544987/android.url_launcher.iml" filepath="$PROJECT_DIR$/.idea/modules/-1395544987/android.url_launcher.iml" />
+    </modules>
+  </component>
+</project>

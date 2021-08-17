@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "161935089618",
+    "project_id": "read-to-me-cf92d",
+    "storage_bucket": "read-to-me-cf92d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161935089618:android:c39f680138e3c79bde720b",
+        "android_client_info": {
+          "package_name": "com.read_to_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161935089618-lr1a93jkm22bf5mn9iqdnkdgp19spmbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJEIqIys20qqt01G8wYjq037AqCxAc37E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161935089618-lr1a93jkm22bf5mn9iqdnkdgp19spmbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
