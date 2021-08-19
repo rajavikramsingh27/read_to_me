@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:read_to_me/Global/Constant.dart';
 import 'package:read_to_me/Global/Global.dart';
 import 'package:read_to_me/AttempTest.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class PickTheWords_VocabularyTest extends StatefulWidget {
@@ -11,6 +13,46 @@ class PickTheWords_VocabularyTest extends StatefulWidget {
 }
 
 class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTest> {
+
+  List<bool> arrSelect = [];
+
+  List<Map<String, dynamic>> arrAttemtTest = [];
+  Map<String, dynamic> dictTestDetails;
+
+  attemtTest() async {
+    showLoader(context);
+    final url = Uri.parse(kBaseURL+'attemt_test');
+    final response = await http.get(url,);
+    Navigator.pop(context);
+
+    if (response.statusCode == 200) {
+      final resbody = jsonDecode(response.body);
+      arrAttemtTest = List<Map<String, dynamic>>.from(resbody);
+
+      for (int i = 0; i<arrAttemtTest.length; i++) {
+        arrSelect.add(false);
+      }
+      print(arrSelect);
+
+      setState(() {
+
+      });
+    } else {
+      'Error \nSomething Went Wrong'.showMessage(context, true);
+    }
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(Duration(microseconds: 100), () {
+      attemtTest();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +83,11 @@ class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTes
                   size: 30,
                 ),
                 onPressed: () {
-                  Navigator.push(
+
+                  dictTestDetails.isNotEmpty ? Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AttempTest()),
-                  );
-                },
+                    MaterialPageRoute(builder: (context) => AttempTest(dictTestDetails)),
+                  ) : null;                },
               )
             ],
             title: Text(
@@ -61,7 +103,7 @@ class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTes
         ),
       ),
       body: ListView.separated(
-          itemCount: 24,
+          itemCount: arrAttemtTest.length,
           separatorBuilder:(context,index) {
             return SizedBox(
               height: 6,
@@ -79,26 +121,43 @@ class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTes
                 elevation: 0,
                 padding: EdgeInsets.all(0)
               ),
+
               child: Container(
                 height: 54,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                      color: HexColor(bg_SecondColor),
-                      borderRadius: BorderRadius.circular(2)
-                  ),
+                  color: arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                  borderRadius: BorderRadius.circular(2),
+                  border: Border.all(
+                    color: HexColor(bg_SecondColor),
+                    width: 1
+                  )
+                ),
                 child: Text(
-                    'Word - '+(index+1).toString(),
+                    (index+1).toString()+' - ' + List<Map<String, dynamic>>.from(
+                        arrAttemtTest[index]['lesson_options']
+                    )[0]['lesson_question'].toString(),
                     style:TextStyle(
-                      fontFamily: 'times new roman',
                       fontSize: 16,
-                      color: Colors.white,
+                      color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                      fontFamily: 'times new roman',
                       fontWeight: FontWeight.normal,
                     ),
                   ),
               ),
-              onPressed: () {
 
+              onPressed: () {
+                dictTestDetails = arrAttemtTest[index];
+
+                for (int i = 0; i<arrSelect.length; i++) {
+                  arrSelect[i] = (i == index) ? true : false;
+                }
+
+                setState(() {
+
+                });
               },
+
             );
 
           }

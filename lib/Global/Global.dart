@@ -6,6 +6,8 @@ import 'package:iphone_has_notch/iphone_has_notch.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:loading_overlay_pro/loading_overlay_pro.dart';
 import 'package:read_to_me/Global/Constant.dart';
+import 'package:toast/toast.dart';
+
 
 
 class HexColor extends Color {
@@ -143,13 +145,12 @@ List<TextSpan> mainFunctionality(String fullText, String strWrittenTextToShow) {
 extension MessageSnackBar on String {
 
   showMessage(context, bool isError) {
-    Scaffold.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: isError ? Colors.red: Colors.green,
-            content:Text(
-            this
-            )
-        )
+    Toast.show(
+        this,
+        context,
+        backgroundColor: isError ? Colors.red : Colors.green,
+        duration: 3,
+        gravity:  Toast.TOP
     );
   }
 
@@ -165,12 +166,12 @@ extension MessageSnackBar on String {
         color: Colors.black12
       ),
     ) ;
+  }
 
-
-    //   FadeInImage(
-    //     image: NetworkImage(this),
-    //     placeholder: AssetImage('assets/default-Photos.png')
-    // );
+  isValidEmail() {
+    return RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
   }
 
 }

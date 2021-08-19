@@ -23,8 +23,8 @@ class _LibraryState extends State<Library> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    Future.delayed(Duration(seconds: 1), () {
+    
+    Future.delayed(Duration(microseconds: 100), () {
       books();
       short_story();
       collection();
@@ -107,10 +107,10 @@ class _LibraryState extends State<Library> {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.only(
-            left: 16,
-            right: 16,
-          ),
+          // padding: EdgeInsets.only(
+          //   left: 16,
+          //   right: 16,
+          // ),
           decoration: BoxDecoration(
             gradient:LinearGradient(
                 begin: Alignment.topLeft,
@@ -128,6 +128,8 @@ class _LibraryState extends State<Library> {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(
                     top: 10,
+                    left: 16,
+                    right: 16,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,52 +176,62 @@ class _LibraryState extends State<Library> {
                       ),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                child:Text(
-                                  'Books',
-                                  style:TextStyle(
-                                    color:Colors.white,
-                                    fontFamily: 'Times new roman',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child:Text(
+                                    'Books',
+                                    style:TextStyle(
+                                      color:Colors.white,
+                                      fontFamily: 'Times new roman',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      alignment: Alignment.centerRight,
-                                      onPrimary: Colors.white,
-                                      primary: Colors.transparent,
-                                      onSurface: Colors.grey,
-                                      elevation: 0,
-                                    ),
-                                    child: Text(
-                                      'MORE',
-                                      textAlign: TextAlign.right,
-                                      style:TextStyle(
-                                        color:Colors.white,
-                                        fontFamily: 'Times new roman',
-                                        fontSize: 14,
+                                Container(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        alignment: Alignment.centerRight,
+                                        onPrimary: Colors.white,
+                                        primary: Colors.transparent,
+                                        onSurface: Colors.grey,
+                                        elevation: 0,
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => LibraryMore('Books', '')),
-                                      );
-                                    }
+                                      child: Text(
+                                        'MORE',
+                                        textAlign: TextAlign.right,
+                                        style:TextStyle(
+                                          color:Colors.white,
+                                          fontFamily: 'Times new roman',
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => LibraryMore('Books', '')),
+                                        );
+                                      }
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           Container(
                             height: 300,
                             child: ListView.separated(
+                                padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                ),
                                 itemCount: arrBooks.length,
                                 scrollDirection: Axis.horizontal,
                                 separatorBuilder: (BuildContext context, int index) {
@@ -292,56 +304,63 @@ class _LibraryState extends State<Library> {
                                 }),
                           ),
                           SizedBox(height:16,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                child:Text(
-                                  'Short Books',
-                                  style:TextStyle(
-                                    color:Colors.white,
-                                    fontFamily: 'Times new roman',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child:Text(
+                                    'Short Books',
+                                    style:TextStyle(
+                                      color:Colors.white,
+                                      fontFamily: 'Times new roman',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      alignment: Alignment.centerRight,
-                                      onPrimary: Colors.white,
-                                      primary: Colors.transparent,
-                                      onSurface: Colors.grey,
-                                      elevation: 0,
-                                    ),
-                                    child: Text(
-                                      'MORE',
-                                      style:TextStyle(
-                                        color:Colors.white,
-                                        fontFamily: 'Times new roman',
-                                        fontSize: 15,
+                                Container(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        alignment: Alignment.centerRight,
+                                        onPrimary: Colors.white,
+                                        primary: Colors.transparent,
+                                        onSurface: Colors.grey,
+                                        elevation: 0,
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => LibraryMore('Short Books', '')),
-                                      );
-                                    }
+                                      child: Text(
+                                        'MORE',
+                                        style:TextStyle(
+                                          color:Colors.white,
+                                          fontFamily: 'Times new roman',
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => LibraryMore('Short Books', '')),
+                                        );
+                                      }
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           Container(
                             height: 300,
                             child: ListView.separated(
+                                padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                ),
                                 itemCount: arrShort_story.length,
                                 scrollDirection: Axis.horizontal,
-                                padding: EdgeInsets.only(
-                                  // left: 10, right: 10
-                                ),
                                 separatorBuilder: (BuildContext context, int index) {
                                   return Container(
                                     width: 10,
@@ -415,6 +434,10 @@ class _LibraryState extends State<Library> {
 
                           SizedBox(height:30,),
                           Container(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                            ),
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Collections',
@@ -430,6 +453,10 @@ class _LibraryState extends State<Library> {
                           Container(
                             height: 200,
                             child: ListView.separated(
+                                padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                ),
                                 itemCount: arrCollection.length,
                                 scrollDirection: Axis.horizontal,
                                 separatorBuilder: (BuildContext context, int index) {
@@ -437,11 +464,12 @@ class _LibraryState extends State<Library> {
                                     width: 10,
                                   );
                                 },
-
                                 itemBuilder: (context,index) {
                                   return FlatButton(
                                     padding: EdgeInsets.zero,
                                     child:Container(
+                                        width: 300,
+                                        height: 200,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(10),
                                             color: Colors.grey.withOpacity(0.6),
@@ -457,8 +485,6 @@ class _LibraryState extends State<Library> {
                                               child: arrBooks[index]["thumbnail"].toString().showImage(),
                                             ),
                                             Container(
-                                              width: 300,
-                                              height: 200,
                                               alignment: Alignment.center,
                                               child: Text(
                                                 arrCollection[index]['title'],
@@ -483,75 +509,77 @@ class _LibraryState extends State<Library> {
                                 }),
                           ),
                           SizedBox(height:16,),
-                          Container(
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: arrCategoryList.length,
-                                itemBuilder: (context, index) {
-                                  return FlatButton(
-                                    padding: EdgeInsets.zero,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 16, bottom: 16
-                                      ),
-                                      decoration: BoxDecoration(
-                                          border: Border(
-                                              bottom: BorderSide(
-                                                  color: Colors.white.withOpacity(
-                                                      (index == 0) ? 0.6 : 0
-                                                  )
-                                              )
-                                          )
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                arrCategoryIcon[index],
-                                                color: Colors.white.withOpacity(0.7),
-                                              ),
-                                              SizedBox(width:10,),
-                                              Text(
-                                                arrCategoryList[index],
-                                                style:TextStyle(
-                                                  color: Colors.white.withOpacity(0.8),
-                                                  fontFamily: 'Times new roman',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
-                                          Icon(
-                                            Icons.arrow_forward_ios_outlined,
-                                            color: Colors.white.withOpacity(0.7),
-                                            size: 20,
-                                          ),
-                                        ],
-                                      ),
+                          ListView.builder(
+                              padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: arrCategoryList.length,
+                              itemBuilder: (context, index) {
+                                return FlatButton(
+                                  padding: EdgeInsets.zero,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        top: 16, bottom: 16
                                     ),
-                                    onPressed: () {
-                                      if (index == 3 || index ==  4 || index == 5) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => LibraryMore(arrCategoryList[index], '')
-                                          ),
-                                        );
-                                      } else {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => Categories(arrCategoryList[index])),
-                                        );
-                                      }
-                                    },
-                                  );
-                                }
-                            ),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.white.withOpacity(
+                                                    (index == 0) ? 0.6 : 0
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              arrCategoryIcon[index],
+                                              color: Colors.white.withOpacity(0.7),
+                                            ),
+                                            SizedBox(width:10,),
+                                            Text(
+                                              arrCategoryList[index],
+                                              style:TextStyle(
+                                                color: Colors.white.withOpacity(0.8),
+                                                fontFamily: 'Times new roman',
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        Icon(
+                                          Icons.arrow_forward_ios_outlined,
+                                          color: Colors.white.withOpacity(0.7),
+                                          size: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (index == 3 || index ==  4 || index == 5) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LibraryMore(arrCategoryList[index], '')
+                                        ),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => Categories(arrCategoryList[index])),
+                                      );
+                                    }
+                                  },
+                                );
+                              }
                           ),
                         ],
 

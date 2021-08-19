@@ -70,28 +70,55 @@ class _WordsState extends State<Words> {
                               )
                             )
                           ),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Total learned',
-                                style:TextStyle(
-                                  fontFamily: 'times new roman',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white70,
-                                ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Total attempted',
+                                    style:TextStyle(
+                                      fontFamily: 'times new roman',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  Text(
+                                    strTotalAttempt,
+                                    style:TextStyle(
+                                      fontFamily: 'times new roman',
+                                      fontSize: 64,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '238',
-                                style:TextStyle(
-                                  fontFamily: 'times new roman',
-                                  fontSize: 64,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Total learned',
+                                    style:TextStyle(
+                                      fontFamily: 'times new roman',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  Text(
+                                    strTotalLearned,
+                                    style:TextStyle(
+                                      fontFamily: 'times new roman',
+                                      fontSize: 64,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
-                          ),
+                          )
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -104,6 +131,8 @@ class _WordsState extends State<Words> {
                           ),
                           child: Container(
                             height: 50,
+                            width: double.infinity,
+                            alignment: Alignment.centerLeft,
                             decoration: BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
@@ -112,28 +141,14 @@ class _WordsState extends State<Words> {
                                     )
                                 )
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'All Progress',
-                                  style:TextStyle(
-                                    fontFamily: 'times new roman',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  '222',
-                                  style:TextStyle(
-                                    fontFamily: 'times new roman',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                            child: Text(
+                              'All Progress',
+                              style:TextStyle(
+                                fontFamily: 'times new roman',
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           onPressed: () {

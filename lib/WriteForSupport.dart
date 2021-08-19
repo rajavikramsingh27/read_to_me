@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:read_to_me/Global/Global.dart';
 import 'package:read_to_me/Global/Constant.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class WriteForSupport extends StatefulWidget {
@@ -11,6 +13,39 @@ class WriteForSupport extends StatefulWidget {
 }
 
 class _WriteForSupportState extends State<WriteForSupport> {
+
+  final txtEmail = TextEditingController();
+  final txtMessage = TextEditingController();
+
+  returnFunction() {
+    return;
+  }
+
+  support() async {
+    showLoader(context);
+    final url = Uri.parse(kBaseURL+'support');
+    final params = {
+      'email': txtEmail.text,
+      'message': txtMessage.text
+    };
+
+    final response = await http.post(
+      url, body: params
+    );
+
+    Navigator.pop(context);
+
+    if (response.statusCode == 200) {
+       final dictResponse = Map<String, dynamic>.from(jsonDecode(response.body));
+       dictResponse['message'].toString().showMessage(context, true);
+
+       Future.delayed(Duration(seconds: 1), () {
+         Navigator.pop(context);
+       });
+    } else {
+      'Error! \n Something went wrong'.showMessage(context, true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +94,7 @@ class _WriteForSupportState extends State<WriteForSupport> {
                 right: 30
               ),
               child: TextField(
+                controller: txtEmail,
                 style:TextStyle(
                   fontFamily: 'times new roman',
                   fontSize: 16,
@@ -106,6 +142,7 @@ class _WriteForSupportState extends State<WriteForSupport> {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: TextField(
+                controller: txtMessage,
                 maxLines: 10,
                 style:TextStyle(
                   fontFamily: 'times new roman',
@@ -155,10 +192,15 @@ class _WriteForSupportState extends State<WriteForSupport> {
               ),
 
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Results()),
-                // );
+                if (txtEmail.text.isEmpty) {
+                  'Enter a email-ID'.showMessage(context, true);
+                } else if (!txtEmail.text.isValidEmail()) {
+                  'Enter a valid email-ID'.showMessage(context, true);
+                } else if (txtMessage.text.isEmpty) {
+                  'Enter a message about support'.showMessage(context, true);
+                } else {
+                  support();
+                }
               },
             ),
           ],

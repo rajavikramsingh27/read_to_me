@@ -20,7 +20,7 @@ class LessonTopicsList extends StatefulWidget {
 class _LessonTopicsListState extends State<LessonTopicsList> {
   List<Map<String, dynamic>> arrLessons = [];
 
-  showCoursesQuestions(context, List<Map<String,dynamic>> lessonOptions) {
+  showCoursesQuestions(context, Map<String,dynamic> dictTestDetails) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -38,7 +38,7 @@ class _LessonTopicsListState extends State<LessonTopicsList> {
                   topRight: Radius.circular(10),
                 )
             ),
-            child: CoursesQuestions(lessonOptions),
+            child: CoursesQuestions(dictTestDetails),
           );
         }
     );
@@ -143,14 +143,7 @@ class _LessonTopicsListState extends State<LessonTopicsList> {
                               ),
                             ),
                             onPressed: () {
-                              print(arrLessons[index]['lesson_options']);
-                              final arrLessonOption = List<Map<String,dynamic>>.from(
-                                  arrLessons[index]['lesson_options']
-                              );
-
-                              print(arrLessonOption);
-
-                              showCoursesQuestions(context, arrLessonOption);
+                              showCoursesQuestions(context, arrLessons[index]);
                             },
                           )
                         ],

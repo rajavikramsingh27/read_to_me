@@ -7,7 +7,8 @@ import 'package:read_to_me/Global/Constant.dart';
 import 'package:read_to_me/Global/Global.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class Setting extends StatefulWidget {
@@ -24,6 +25,61 @@ class _SettingState extends State<Setting> {
   String languageSelected = 'English';
   String levelSelected = 'Beginner';
 
+  Map<String, dynamic> dictAppDetails = {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(Duration(seconds: 1), () {
+      app_details();
+    });
+  }
+
+  app_details() async {
+    showLoader(context);
+    var url = Uri.parse(kBaseURL+'app_details');
+    final response = await http.get(
+      url,
+    );
+
+    Navigator.pop(context);
+
+    if (response.statusCode == 200) {
+      final resbody = jsonDecode(response.body);
+      dictAppDetails = Map<String, dynamic>.from(resbody);
+
+      setState(() {
+
+      });
+    }
+  }
+
+  apiUserUpdate(Map<String, String> param) async {
+    showLoader(context);
+
+    final paramID = {'id':kUserID,};
+
+    final params = {};
+    params.addAll(paramID);
+    params.addAll(param);
+
+    final response = await http.put(
+        Uri.parse(kBaseURL+'user'),
+        body: params
+    );
+
+    Navigator.pop(context);
+
+    if(response.statusCode == 200) {
+      final dictResponse = Map<String, dynamic>.from(jsonDecode(response.body));
+      dictResponse['message'].toString().showMessage(context, false);
+    } else {
+      'Error! \nSomething Went Wrong!'.showMessage(context, true);
+    }
+  }
+
   levelLanguageSetState(String level) {
     levelSelected = level;
 
@@ -32,6 +88,7 @@ class _SettingState extends State<Setting> {
     });
 
     Navigator.pop(context);
+    apiUserUpdate({'level': level,});
   }
 
   levelLanguage() {
@@ -179,6 +236,7 @@ class _SettingState extends State<Setting> {
     });
 
     Navigator.pop(context);
+    apiUserUpdate({'language': language,});
   }
 
   nativeLanguage() {
@@ -510,33 +568,33 @@ class _SettingState extends State<Setting> {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: 40,),
-                        Container(
-                          height: 54,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'crown.png',
-                                width:24,
-                                height:24,
-                              ),
-                              SizedBox(width: 10,),
-                              Text(
-                                'Start a free trial',
-                                style:TextStyle(
-                                  fontFamily: 'times new roman',
-                                  color:Colors.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // SizedBox(height: 40,),
+                        // Container(
+                        //   height: 54,
+                        //   decoration: BoxDecoration(
+                        //     color: Colors.white,
+                        //     borderRadius: BorderRadius.circular(4),
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Image.asset(
+                        //         'crown.png',
+                        //         width:24,
+                        //         height:24,
+                        //       ),
+                        //       SizedBox(width: 10,),
+                        //       Text(
+                        //         'Start a free trial',
+                        //         style:TextStyle(
+                        //           fontFamily: 'times new roman',
+                        //           color:Colors.black,
+                        //           fontSize: 16,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
 
                         SizedBox(height: 16,),
 
@@ -575,8 +633,8 @@ class _SettingState extends State<Setting> {
                               ),
                               onPressed: () {
                                 Platform.isIOS
-                                    ? launch('https://www.apple.com/app-store/')
-                                    : launch('https://play.google.com/store');
+                                    ? launch(dictAppDetails['appStore'].toString())
+                                    : launch(dictAppDetails['playStore'].toString());
                               },
                             )
                         ),
@@ -635,7 +693,7 @@ class _SettingState extends State<Setting> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    launch('https://www.facebook.com/groups/2002414850011350');
+                                    launch(dictAppDetails['fbPage'].toString());
                                   },
                                 ),
                                 FlatButton(
@@ -670,7 +728,7 @@ class _SettingState extends State<Setting> {
                                   ),
 
                                   onPressed: () {
-                                    launch('https://www.instagram.com/flutter_app_developers/');
+                                    launch(dictAppDetails['instagram'].toString());
                                   },
                                 ),
                                 FlatButton(
@@ -705,7 +763,7 @@ class _SettingState extends State<Setting> {
                                   ),
 
                                   onPressed: () {
-                                    launch('https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw');
+                                    launch(dictAppDetails['youTubeChannel'].toString());
                                   },
                                 ),
                               ],
@@ -737,39 +795,44 @@ class _SettingState extends State<Setting> {
                             ),
                           ),
                           onPressed: () {
-                            Share.share('check out my website https://example.com');
+                            final appStore = dictAppDetails['appStore'].toString();
+                            final playStore = dictAppDetails['playStore'].toString();
+
+                            Share.share('To download for iPhone visit here:- $appStore, '
+                                '\n\nTo download for iPhone visit here:-  $playStore'
+                            );
                           },
                         ),
 
-                        FlatButton(
-                          padding: EdgeInsets.zero,
-                          child: Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width,
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        width: 1,
-                                        color: Colors.white.withOpacity(0.5)
-                                    )
-                                )
-                            ),
-                            child: Text(
-                              'Restore Purchases',
-                              textAlign: TextAlign.left,
-                              style:TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'times new roman',
-                                color:Colors.white,
-                              ),
-                            ),
-                          ),
-
-                          onPressed: () {
-
-                          },
-                        ),
+                        // FlatButton(
+                        //   padding: EdgeInsets.zero,
+                        //   child: Container(
+                        //     height: 50,
+                        //     width: MediaQuery.of(context).size.width,
+                        //     alignment: Alignment.centerLeft,
+                        //     decoration: BoxDecoration(
+                        //         border: Border(
+                        //             bottom: BorderSide(
+                        //                 width: 1,
+                        //                 color: Colors.white.withOpacity(0.5)
+                        //             )
+                        //         )
+                        //     ),
+                        //     child: Text(
+                        //       'Restore Purchases',
+                        //       textAlign: TextAlign.left,
+                        //       style:TextStyle(
+                        //         fontSize: 16,
+                        //         fontFamily: 'times new roman',
+                        //         color:Colors.white,
+                        //       ),
+                        //     ),
+                        //   ),
+                        //
+                        //   onPressed: () {
+                        //
+                        //   },
+                        // ),
 
                         // Container(
                         //   decoration: BoxDecoration(

@@ -20,7 +20,8 @@ import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter/gestures.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class ReadBook extends StatefulWidget {
@@ -220,44 +221,6 @@ class _ReadBookState extends State<ReadBook> {
     setState(() {
 
     });
-
-    // try {
-      // error.errorMsg.toString().showMessage(context, true);
-    //
-    //   Scaffold.of(context).showSnackBar(
-    //       SnackBar(
-    //           // backgroundColor: isError ? Colors.red: Colors.green,
-    //           content:Text(
-    //               error.errorMsg.toString()
-    //           )
-    //       )
-    //   );
-    // } catch(error) {
-    //   // error.message.toString().showMessage(context, true);
-    //
-    //   Scaffold.of(context).showSnackBar(
-    //       SnackBar(
-    //           // backgroundColor: isError ? Colors.red: Colors.green,
-    //           content:Text(
-    //               error.message.toString()
-    //           )
-    //       )
-    //   );
-    // }
-
-    // Future.delayed(Duration(seconds: 3), () {
-    //
-    //   setState(() {
-    //
-    //   });
-    // });
-
-    // lastError = '${error.errorMsg} - ${error.permanent}';
-
-    // setState(() {
-
-    // });
-
   }
 
   void statusListener(String status) {
@@ -276,6 +239,10 @@ class _ReadBookState extends State<ReadBook> {
     initSpeechState();
 
     _newVoiceText = widget.dictReadBooks['description'];
+
+    Future.delayed(Duration(microseconds: 100), () {
+      history();
+    });
   }
 
   @override
@@ -445,10 +412,12 @@ class _ReadBookState extends State<ReadBook> {
                                 ),
                                 IconButton(
                                     onPressed:() {
-
+                                      favorite();
                                     },
                                     icon: Image.asset(
-                                      'bookmark_1.png',
+                                      (widget.dictReadBooks['favorite'].toString() == 'true')
+                                          ? 'bookmark_1.png'
+                                          : 'bookmark-not.png' ,
                                       height: 26,
                                     )
                                 ),
@@ -756,7 +725,51 @@ class _ReadBookState extends State<ReadBook> {
     );
   }
 
+  favorite()  async {
+    try {
+      showLoader(context);
+      final url = Uri.parse(kBaseURL+'books');
+      final params = {
+        'id': widget.dictReadBooks['id'],
+        'favorite': (widget.dictReadBooks['favorite'].toString() == 'true')
+            ? 'false'
+            : 'true'
+      };
 
+      final response = await http.put(url, body: params);
+      Navigator.pop(context);
+
+      if (response.statusCode == 200) {
+        final dictResponse = Map<String, dynamic>.from(jsonDecode(response.body));
+        dictResponse['message'].toString().showMessage(context, false);
+
+        final dictData = Map<String, dynamic>.from(dictResponse['data']);
+        widget.dictReadBooks['favorite'] = dictData['favorite'];
+
+        setState(() {
+
+        });
+      } else {
+
+      }
+    } on Exception catch (error) {
+      print(error);
+      // error.message.showMessage(context, true);
+    }
+  }
+
+  history()  async {
+    try {
+      final url = Uri.parse(kBaseURL + 'books');
+      final params = {
+        'id': widget.dictReadBooks['id'],
+        'history': 'true'
+      };
+      final response = await http.put(url, body: params);
+    } on Exception catch (error) {
+      print(error);
+    }
+  }
 
   speak_WordByWord(FlutterTts flutterTts, String fullString) async {
     await flutterTts.setVolume(0.5);

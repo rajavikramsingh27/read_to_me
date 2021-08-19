@@ -44,6 +44,7 @@ dependencies:
   share: ^2.0.4
   flutter_tts: ^3.2.1
   speech_to_text: ^4.2.2
+  toast: ^0.1.5
 
 
 dev_dependencies:
@@ -134,6 +135,7 @@ flutter:
     - settingsUnselected.png
     - upload.png
     - bookmark_1.png
+    - bookmark-not.png
     - download.png
     - agenda.png
     - crown.png

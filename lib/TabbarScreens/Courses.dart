@@ -37,15 +37,32 @@ class _CoursesState extends State<Courses> {
     }
   }
 
+  userDetails() async {
+    final url = Uri.parse(kBaseURL+'user');
+    final response = await http.post(url, body: {'id': kUserID});
+
+    if (response.statusCode == 200) {
+      final resbody = jsonDecode(response.body);
+      final dictResponse = Map<String, dynamic>.from(resbody);
+      strTotalLearned = dictResponse['total_learned'];
+      strTotalAttempt = dictResponse['total_attempt'];
+    } else {
+      'Error \nSomething Went Wrong'.showMessage(context, true);
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(microseconds: 100), () {
       courses();
+      userDetails();
     });
   }
+
+
   @override
     Widget build(BuildContext context) {
       return Scaffold(

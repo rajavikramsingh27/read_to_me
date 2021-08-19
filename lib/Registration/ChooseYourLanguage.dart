@@ -103,6 +103,8 @@ class _ChooseYourLanguageState extends State<ChooseYourLanguage> {
     final params = {
       'id':kUserID,
       'language': selectedLanguage,
+      'total_attempt' : '0',
+      'total_learned' : '0'
     };
 
     final response = await http.put(

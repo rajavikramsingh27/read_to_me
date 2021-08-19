@@ -1,14 +1,27 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:read_to_me/Global/Constant.dart';
 import 'package:read_to_me/Global/Global.dart';
 
+
 class Results extends StatefulWidget {
+  int correctAnswer;
+
+  Results(this.correctAnswer);
+
   @override
   _ResultsState createState() => _ResultsState();
 }
 
 class _ResultsState extends State<Results> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +59,9 @@ class _ResultsState extends State<Results> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.of(context)
+                      ..pop()
+                      ..pop();
                   },
                 )
               )
@@ -73,7 +88,7 @@ class _ResultsState extends State<Results> {
                   ),
                   SizedBox(height: 60,),
                   Text(
-                    '240',
+                    (widget.correctAnswer*10).toString(),
                     style:TextStyle(
                       fontSize: 40,
                       fontFamily: 'times new roman',
