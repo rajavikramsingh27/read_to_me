@@ -74,44 +74,20 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "firebase_auth",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "firebase_auth_web",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "firebase_core",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "firebase_core_platform_interface",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "firebase_core_web",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter",
       "rootUri": "file:///Users/granzax/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_facebook_login",
+      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_rating_bar-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -189,7 +165,7 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
+      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -369,7 +345,7 @@
     },
     {
       "name": "url_launcher_windows",
-      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-2.0.1",
+      "rootUri": "file:///Users/granzax/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -392,7 +368,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-08-18T19:44:13.673281Z",
+  "generated": "2021-08-20T08:39:41.154687Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-188.5.beta"
 }

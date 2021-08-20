@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:read_to_me/Global/Constant.dart';
 import 'package:read_to_me/Global/Global.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class Results extends StatefulWidget {
@@ -59,9 +60,7 @@ class _ResultsState extends State<Results> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context)
-                      ..pop()
-                      ..pop();
+                    showRating(context);
                   },
                 )
               )
@@ -107,30 +106,30 @@ class _ResultsState extends State<Results> {
                     ),
                   ),
                   SizedBox(height: 60,),
-                  FlatButton(
-                    padding: EdgeInsets.zero,
-                    child: Container(
-                      height: 50,
-                      width: 140,
-                      decoration: BoxDecoration(
-                        color: HexColor(bg_SecondColor),
-                        borderRadius: BorderRadius.circular(27),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Share',
-                        style:TextStyle(
-                          fontFamily: 'Times new roman',
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-
-                    onPressed: () {
-
-                    },
-                  ),
+                  // FlatButton(
+                  //   padding: EdgeInsets.zero,
+                  //   child: Container(
+                  //     height: 50,
+                  //     width: 140,
+                  //     decoration: BoxDecoration(
+                  //       color: HexColor(bg_SecondColor),
+                  //       borderRadius: BorderRadius.circular(27),
+                  //     ),
+                  //     alignment: Alignment.center,
+                  //     child: Text(
+                  //       'Submit',
+                  //       style:TextStyle(
+                  //         fontFamily: 'Times new roman',
+                  //         color: Colors.white,
+                  //         fontSize: 16,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //
+                  //   onPressed: () {
+                  //
+                  //   },
+                  // ),
                 ],
               ),
             )
@@ -140,4 +139,134 @@ class _ResultsState extends State<Results> {
     );
 
   }
+}
+
+
+
+double sizeRatingIcon = 40;
+
+showRating(context) {
+  showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: 260,
+          alignment: Alignment.topCenter,
+          margin: EdgeInsets.only(
+              left: 16, right: 16
+          ),
+          padding: EdgeInsets.only(
+              left: 16, right: 16
+          ),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10)
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Text(
+                'Rate this book according your experience.',
+                textAlign: TextAlign.center,
+                style:TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'times new roman',
+                  fontWeight: FontWeight.normal,
+                  color: HexColor(bg_FirstColor),
+                ),
+              ),
+              SizedBox(height: 20,),
+              RatingBar.builder(
+                  initialRating: 3,
+                  itemCount: 5,
+                  itemSize: 54,
+                  itemBuilder: (context, index) {
+                    switch (index) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    print(rating);
+                  }),
+              SizedBox(height: 40,),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          primary: HexColor(bg_FirstColor),
+                          elevation: 0,
+                          fixedSize: Size.fromHeight(50)
+                      ),
+                      child: Text(
+                        'Submit',
+                        style:TextStyle(
+                          fontFamily: 'times new roman',
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          primary: HexColor(bg_FirstColor),
+                          elevation: 0,
+                          fixedSize: Size.fromHeight(50)
+                      ),
+                      child: Text(
+                        'Cancel',
+                        style:TextStyle(
+                          fontFamily: 'times new roman',
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)..pop()..pop()..pop()..pop();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      }
+  );
+
 }

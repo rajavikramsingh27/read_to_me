@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+import 'package:read_to_me/Registration/LoginTypes.dart';
 import 'package:read_to_me/Global/Constant.dart';
 import 'package:read_to_me/Global/Global.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -476,7 +476,11 @@ class _SettingState extends State<Setting> {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginTypes()
+                                  )
+                              );
                             },
                           ),
                         ),

@@ -24,6 +24,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
+
 class ReadBook extends StatefulWidget {
   Map<String, dynamic> dictReadBooks = {};
 
@@ -928,5 +929,3 @@ class _ReadBookState extends State<ReadBook> {
 enum TtsState {
   playing, stopped, paused, continued
 }
-
-

@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:read_to_me/Registration/SelectYourAge.dart';
+import 'package:read_to_me/Global/Global.dart';
+import 'package:read_to_me/Global/Constant.dart';
+import 'package:read_to_me/Registration/LoginTypes.dart';
 
 
 class Emailscreen extends StatefulWidget {
@@ -10,6 +13,11 @@ class Emailscreen extends StatefulWidget {
 }
 
 class _EmailscreenState extends State<Emailscreen> {
+  final txtEmail = TextEditingController();
+  final txtPassword = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +65,7 @@ class _EmailscreenState extends State<Emailscreen> {
                     alignment: Alignment.centerLeft,
                     margin: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormField(
+                      controller: txtEmail,
                       textAlign: TextAlign.left,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -91,8 +100,9 @@ class _EmailscreenState extends State<Emailscreen> {
                     alignment: Alignment.centerLeft,
                     margin: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormField(
-                      textAlign: TextAlign.left,
+                      controller: txtPassword,
                       obscureText: true,
+                      textAlign: TextAlign.left,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -138,17 +148,24 @@ class _EmailscreenState extends State<Emailscreen> {
                       child: Text(
                         'Sign In',
                         style: TextStyle(
-                          fontFamily: 'times new roman',
-
                           color: Colors.black,
                           fontSize: 16,
+                          fontFamily: 'times new roman',
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SelectYourAge()),
-                        );
+                        FocusScope.of(context).unfocus();
+
+                        if (txtEmail.text.isEmpty) {
+                          'Enter your email'.showMessage(context, true);
+                        } else if (!txtEmail.text.isValidEmail()) {
+                          'Enter a valid email'.showMessage(context, true);
+                        } else if (txtPassword.text.isEmpty) {
+                          'Enter your password'.showMessage(context, true);
+                        } else {
+                          final param = {'email': txtEmail.text, 'password': txtPassword.text};
+                          apiUserAll(context, param);
+                        }
                       },
                     ),
                   ),
@@ -160,7 +177,7 @@ class _EmailscreenState extends State<Emailscreen> {
                         style: TextStyle(
                           fontFamily: 'times new roman',
                           color: Colors.white,
-                          fontSize: 13,
+                          fontSize: 16,
                         ),
                       ),
                       onPressed: () {
@@ -171,25 +188,25 @@ class _EmailscreenState extends State<Emailscreen> {
                       },
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: FlatButton(
-                      child: Text(
-                        "Already have an account.",
-                        style: TextStyle(
-                          fontFamily: 'times new roman',
-                          color: Colors.white,
-                          fontSize: 13,
-                        ),
-                      ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => RegistrationBirthday()),
-                        // );
-                      },
-                    ),
-                  )
+                  // Container(
+                  //   alignment: Alignment.center,
+                  //   child: FlatButton(
+                  //     child: Text(
+                  //       "Already have an account.",
+                  //       style: TextStyle(
+                  //         fontFamily: 'times new roman',
+                  //         color: Colors.white,
+                  //         fontSize: 13,
+                  //       ),
+                  //     ),
+                  //     onPressed: () {
+                  //       // Navigator.push(
+                  //       //   context,
+                  //       //   MaterialPageRoute(builder: (context) => RegistrationBirthday()),
+                  //       // );
+                  //     },
+                  //   ),
+                  // )
                 ],
               ),
             )
