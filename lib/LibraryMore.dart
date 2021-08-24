@@ -33,7 +33,7 @@ class _LibraryMoreState extends State<LibraryMore> {
     var url;
 
     if (widget.strType.toLowerCase() == 'category'.toLowerCase()) {
-      endPointAPI = 'category';
+      endPointAPI = 'category/books';
       params = {
         'category': widget.strValue
       };
@@ -41,7 +41,7 @@ class _LibraryMoreState extends State<LibraryMore> {
       url = Uri.parse(kBaseURL+endPointAPI);
       response = await http.post(url,body: params);
     } else if (widget.strType.toLowerCase() == 'geners'.toLowerCase()) {
-      endPointAPI = 'geners';
+      endPointAPI = 'geners/books';
       params = {
         'geners': widget.strValue
       };
@@ -49,7 +49,7 @@ class _LibraryMoreState extends State<LibraryMore> {
       url = Uri.parse(kBaseURL+endPointAPI);
       response = await http.post(url,body: params);
     } else if (widget.strType.toLowerCase() == 'Difficulty'.toLowerCase()) {
-      endPointAPI = 'difficulty';
+      endPointAPI = 'difficulty/books';
       params = {
         'difficulty': widget.strValue
       };

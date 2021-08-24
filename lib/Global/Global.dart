@@ -156,9 +156,12 @@ extension MessageSnackBar on String {
 
   showImage() {
     return this.isNotEmpty
-        ? NetworkImage(
-        this)
-        : Container(
+        ? Image(
+      height: double.infinity,
+      width: double.infinity,
+      image: NetworkImage(this, ),
+      fit: BoxFit.fill,
+    ) : Container(
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(

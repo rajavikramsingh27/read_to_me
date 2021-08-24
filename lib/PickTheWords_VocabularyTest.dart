@@ -123,8 +123,11 @@ class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTes
               ),
 
               child: Container(
-                height: 54,
+                // height: 54,
                 alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                  left: 10 , top: 10, bottom: 10
+                ),
                 decoration: BoxDecoration(
                   color: arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
                   borderRadius: BorderRadius.circular(2),
@@ -133,17 +136,75 @@ class _PickTheWords_VocabularyTestState extends State<PickTheWords_VocabularyTes
                     width: 1
                   )
                 ),
-                child: Text(
-                    (index+1).toString()+' - ' + List<Map<String, dynamic>>.from(
-                        arrAttemtTest[index]['lesson_options']
-                    )[0]['lesson_question'].toString(),
-                    style:TextStyle(
-                      fontSize: 16,
-                      color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
-                      fontFamily: 'times new roman',
-                      fontWeight: FontWeight.normal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ('(')+(index+1).toString() +'.) ',
+                      style:TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        // color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                        fontFamily: 'times new roman',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Title:- ',
+                              style:TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                // color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                                fontFamily: 'times new roman',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              arrAttemtTest[index]['title'].toString(),
+                              style:TextStyle(
+                                fontSize: 16,
+                                // color: Colors.black,
+                                color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                                fontFamily: 'times new roman',
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Text(
+                              'Difficulty:- ',
+                              style:TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                // color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                                fontFamily: 'times new roman',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              arrAttemtTest[index]['difficulty'].toString(),
+                              style:TextStyle(
+                                fontSize: 16,
+                                // color: Colors.black,
+                                color: !arrSelect[index] ? HexColor(bg_SecondColor) : Colors.white,
+                                fontFamily: 'times new roman',
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                )
               ),
 
               onPressed: () {

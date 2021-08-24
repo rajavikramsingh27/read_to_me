@@ -130,7 +130,6 @@ class _LoginTypesState extends State<LoginTypes> {
                                   width:20,
                                   height:20,
                                 ),
-
                                 onPressed: () async {
                                   GoogleSignInAccount googleSignIn;
                                   googleSignIn = await GoogleSignIn().signIn();

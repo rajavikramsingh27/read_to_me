@@ -482,7 +482,7 @@ class _LibraryState extends State<Library> {
                                           children: [
                                             ClipRRect (
                                               borderRadius: BorderRadius.circular(10),
-                                              child: arrBooks[index]["thumbnail"].toString().showImage(),
+                                              child: arrCollection[index]["thumbnail"].toString().showImage(),
                                             ),
                                             Container(
                                               alignment: Alignment.center,
